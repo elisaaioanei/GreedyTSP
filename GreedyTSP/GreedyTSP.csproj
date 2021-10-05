@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BacktrackingSolution.cs" />
     <Compile Include="BacktrackingSolver.cs" />
     <Compile Include="City.cs" />
     <Compile Include="GreedySolver.cs" />
