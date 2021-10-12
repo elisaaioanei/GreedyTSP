@@ -12,19 +12,44 @@ namespace GreedyTSP
             var inputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Input.txt";
             var outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Output.txt";
 
-            GenerateInputInstances(inputFilePath, 1000);
+            GenerateInputInstances(inputFilePath, 10);
 
             var cities = ReadInputFile(inputFilePath);
+
+            ShowAdjacentMatrix(cities);
 
             var watch = new Stopwatch();
             watch.Start();
 
-            var route = new GreedySolver().Solve(cities);
+            var route = new GreedySolver().SolveSimpler(cities);
 
             watch.Stop();
             var elapsedTime = watch.ElapsedMilliseconds;
 
             WriteToFile(outputFilePath, route, elapsedTime);
+        }
+
+        private static void ShowAdjacentMatrix(List<City> cities)
+        {
+            Console.Write("\t");
+            for (int i = 0; i < cities.Count; i++)
+            {
+                Console.Write(i + 1 + "\t");
+            }
+            Console.Write("\n");
+
+            for (int i = 0; i < cities.Count; i++)
+            {
+                Console.Write(i + 1 + ":\t");
+                for (int j = 0; j < cities.Count; j++)
+                {
+                    var distance = Math.Round(Utils.GetDistance(cities[i], cities[j]),2);
+                    Console.Write(distance + "\t");
+                }
+                Console.Write("\n");
+            }
+
+            Console.ReadLine();
         }
 
         public static void GenerateInputInstances(string filePath, int numberOfInstances)
@@ -44,14 +69,9 @@ namespace GreedyTSP
             var totalCost = 0.0;
             for (int i = 0; i < cities.Count - 1; i++)
             {
-                totalCost += GetDistance(cities[i], cities[i + 1]);
+                totalCost += Utils.GetDistance(cities[i], cities[i + 1]);
             }
             return totalCost;
-        }
-
-        private static double GetDistance(City city1, City city2)
-        {
-            return Math.Sqrt(Math.Pow(city2.X - city1.X, 2) + Math.Pow(city2.Y - city1.Y, 2));
         }
 
         private static List<City> ReadInputFile(string filePath)

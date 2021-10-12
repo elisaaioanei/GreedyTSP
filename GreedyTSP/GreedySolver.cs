@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GreedyTSP
 {
@@ -35,7 +36,7 @@ namespace GreedyTSP
                     // Given a current position, find the closest city (if exists)
                     for (int j = 0; j < unvisitedCities.Count; j++)
                     {
-                        double currentDistance = GetDistance(cities[currentPosition], cities[unvisitedCities[j]]);
+                        double currentDistance = Utils.GetDistance(cities[currentPosition], cities[unvisitedCities[j]]);
                         if (currentDistance < minPathDistance)
                         {
                             minPathDistance = currentDistance;
@@ -44,7 +45,7 @@ namespace GreedyTSP
                     }
 
                     // There is no possible solution starting from the current position
-                    if (minPathDistance == double.PositiveInfinity) 
+                    if (minPathDistance == double.PositiveInfinity)
                     {
                         finalRoute.Clear();
                         unvisitedCities = new List<int>(allCities);
@@ -61,7 +62,7 @@ namespace GreedyTSP
                 }
 
                 // Check to see if the current node has a valid path back to the starting node
-                if (GetDistance(cities[currentPosition], cities[startPosition]) == double.PositiveInfinity)
+                if (Utils.GetDistance(cities[currentPosition], cities[startPosition]) == double.PositiveInfinity)
                 {
                     finalRoute.Clear();
                     unvisitedCities = new List<int>(allCities);
@@ -73,9 +74,51 @@ namespace GreedyTSP
             return finalRoute;
         }
 
-        private double GetDistance(City city1, City city2)
+        public List<City> SolveSimpler(List<City> cities)
         {
-            return Math.Sqrt(Math.Pow(city2.X - city1.X, 2) + Math.Pow(city2.Y - city1.Y, 2));
+            var finalRoute = new List<City>();
+
+            var currentCityIndex = 0;
+            var firstCity = cities[currentCityIndex];
+            finalRoute.Add(firstCity);
+
+            while (finalRoute.Count != cities.Count)
+            {                
+                var currentCity = cities[currentCityIndex];
+
+                var minDistance = double.PositiveInfinity;
+                var minDistanceCity = new City();
+
+                for (int nextCityIndex = 0; nextCityIndex < cities.Count; nextCityIndex++)
+                {
+                    if (currentCityIndex != nextCityIndex)
+                    {
+                        var nextCity = cities[nextCityIndex];
+
+                        // Check if nextCity has already been visited 
+                        var foundCity = finalRoute.Find(c => c.Number == nextCity.Number);
+                        // nextCity is not added to finalRoute
+                        if(foundCity == null)
+                        {
+                            var distance = Utils.GetDistance(currentCity, nextCity);
+                            if (distance < minDistance)
+                            {
+                                minDistance = distance;
+                                minDistanceCity = nextCity;
+                            }
+                        }                        
+                    }
+                }
+
+                if (minDistance != double.PositiveInfinity)
+                {
+                    finalRoute.Add(minDistanceCity);
+                    currentCityIndex = minDistanceCity.Number - 1;
+                }
+            }
+
+
+            return finalRoute;
         }
     }
 }
