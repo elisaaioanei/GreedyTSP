@@ -117,7 +117,6 @@ namespace GreedyTSP
                 }
             }
 
-
             return finalRoute;
         }
     }

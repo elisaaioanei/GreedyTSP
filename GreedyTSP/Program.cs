@@ -12,11 +12,11 @@ namespace GreedyTSP
             var inputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Input.txt";
             var outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Output.txt";
 
-            GenerateInputInstances(inputFilePath, 10);
+            //GenerateInputInstances(inputFilePath, 10);
 
             var cities = ReadInputFile(inputFilePath);
 
-            ShowAdjacentMatrix(cities);
+            //ShowAdjacentMatrix(cities);
 
             var watch = new Stopwatch();
             watch.Start();
@@ -26,6 +26,10 @@ namespace GreedyTSP
             watch.Stop();
             var elapsedTime = watch.ElapsedMilliseconds;
 
+            WriteToFile(outputFilePath, route, elapsedTime);
+
+             outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\OutputRecursive.txt";
+            route = new RecursiveSolver().Solve(cities);
             WriteToFile(outputFilePath, route, elapsedTime);
         }
 
