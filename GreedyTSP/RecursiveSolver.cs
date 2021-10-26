@@ -13,12 +13,14 @@ namespace GreedyTSP
             var finalRoute = new List<City>();
 
             var currentCityIndex = 0;
-            finalRoute.Add(cities[currentCityIndex]);
+            var firstCity = cities[currentCityIndex];
+            finalRoute.Add(firstCity);
 
             finalRoute = SolveRecursive(cities, finalRoute, currentCityIndex);
 
             return finalRoute;
         }
+
 
         public List<City> SolveRecursive(List<City> cities, List<City> finalRoute, int currentCityIndex)
         {
@@ -29,6 +31,7 @@ namespace GreedyTSP
             else
             {
                 var currentCity = cities[currentCityIndex];
+
                 var minDistance = double.PositiveInfinity;
                 var minDistanceCity = new City();
 
