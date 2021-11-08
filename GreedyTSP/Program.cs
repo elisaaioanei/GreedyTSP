@@ -31,6 +31,12 @@ namespace GreedyTSP
              outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\OutputRecursive.txt";
             route = new RecursiveSolver().Solve(cities);
             WriteToFile(outputFilePath, route, elapsedTime);
+
+            var list = new List<int>() { 1, 4, 6, 10, 20, 43, 56, 67, 70, 87, 97 };
+            var searchemItemPosition = new DivideEtImpera().GetSearchedItemPosition(list, 20);
+
+            list = new List<int>() { 1, 104, 69, 105, 20, 43, 190, 87 };
+            var maxElement = new DivideEtImpera().GetMaxElement(list);
         }
 
         private static void ShowAdjacentMatrix(List<City> cities)
