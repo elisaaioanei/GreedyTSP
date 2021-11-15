@@ -9,34 +9,37 @@ namespace GreedyTSP
     {
         static void Main(string[] args)
         {
-            var inputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Input.txt";
-            var outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Output.txt";
+            //var inputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Input.txt";
+            //var outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\Output.txt";
 
             //GenerateInputInstances(inputFilePath, 10);
 
-            var cities = ReadInputFile(inputFilePath);
+            //var cities = ReadInputFile(inputFilePath);
 
             //ShowAdjacentMatrix(cities);
 
-            var watch = new Stopwatch();
-            watch.Start();
+            //var watch = new Stopwatch();
+            //watch.Start();
 
-            var route = new GreedySolver().SolveSimpler(cities);
+            //var route = new GreedySolver().SolveSimpler(cities);
 
-            watch.Stop();
-            var elapsedTime = watch.ElapsedMilliseconds;
+            //watch.Stop();
+            //var elapsedTime = watch.ElapsedMilliseconds;
 
-            WriteToFile(outputFilePath, route, elapsedTime);
+            //WriteToFile(outputFilePath, route, elapsedTime);
 
-             outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\OutputRecursive.txt";
-            route = new RecursiveSolver().Solve(cities);
-            WriteToFile(outputFilePath, route, elapsedTime);
+            // outputFilePath = @"C:\Users\elisa\source\repos\GreedyTSP\GreedyTSP\OutputRecursive.txt";
+            //route = new RecursiveSolver().Solve(cities);
+            //WriteToFile(outputFilePath, route, elapsedTime);
 
-            var list = new List<int>() { 1, 4, 6, 10, 20, 43, 56, 67, 70, 87, 97 };
-            var searchemItemPosition = new DivideEtImpera().GetSearchedItemPosition(list, 20);
+            //var list = new List<int>() { 1, 4, 6, 10, 20, 43, 56, 67, 70, 87, 97 };
+            //var searchemItemPosition = new DivideEtImpera().GetSearchedItemPosition(list, 20);
 
-            list = new List<int>() { 1, 104, 69, 105, 20, 43, 190, 87 };
-            var maxElement = new DivideEtImpera().GetMaxElement(list);
+            //list = new List<int>() { 1, 104, 69, 105, 20, 43, 190, 87 };
+            //var maxElement = new DivideEtImpera().GetMaxElement(list);
+
+            new PermutationsBacktrackingSolver(3).Solve();
+            Console.ReadKey();
         }
 
         private static void ShowAdjacentMatrix(List<City> cities)

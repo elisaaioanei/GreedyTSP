@@ -2,7 +2,7 @@
 
 namespace GreedyTSP
 {
-    public class BacktrackingSolver
+    public class BacktrackingTSPSolver
     {
         public List<City> Solve(List<City> cities)
         {

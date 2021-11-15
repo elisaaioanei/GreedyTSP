@@ -44,7 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BacktrackingSolution.cs" />
-    <Compile Include="BacktrackingSolver.cs" />
+    <Compile Include="BacktrackingTSPSolver.cs" />
+    <Compile Include="PermutationsBacktrackingSolver.cs" />
     <Compile Include="City.cs" />
     <Compile Include="DivideEtImpera.cs" />
     <Compile Include="GreedySolver.cs" />
